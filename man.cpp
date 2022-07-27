@@ -8,7 +8,7 @@ O programa retorna o vetor S em coordenadas locais/horizontais a partir das coor
 Criado por: Miller calixto almeida
 Data de criação: 24/07/2022
 
-Ultima modificacao: 24/07/2022
+Ultima modificacao: 27/07/2022
 Status:EM ANDAMENTO
 * *******************************************************************************/
 #include <cmath>
@@ -16,11 +16,21 @@ Status:EM ANDAMENTO
 #include <vector>
 #include <cstdlib>
 
-int main(){
+class Coord{
+  
+  public:
+     void vetor3d( float x, float y,float z){
+  
+      std::vector<float> array_coord;
+      
+      array_coord.push_back (x);
+      array_coord.push_back (y);
+      array_coord.push_back (z);
+    }
+   
+};
 
-std::vector <double> vector_b_j;
-std::vector <double> vector_y;//P
-std::vector <double> vector_x;//J
+int main(){
 
  
 
