@@ -9,7 +9,7 @@ Criado por: Miller calixto almeida
 Data de criação: 24/07/2022
 
 Ultima modificacao: 24/07/2022
-Status:FUNCIONA
+Status:EM ANDAMENTO
 * *******************************************************************************/
 #include <cmath>
 #include <iostream>
