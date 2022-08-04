@@ -12,7 +12,7 @@ Ultima modificacao: 03/01/2022
 Status:FUNCIONA
 * *******************************************************************************/
 
-#include "classe_vetor3D.h"
+#include "classe_vetor3D.cpp"
 #include <cmath>
 #include <iostream>
 #include <vector>
@@ -21,9 +21,13 @@ Status:FUNCIONA
 
 int main(){
 
-
 vetor3d coordenadas; //criando objeto;
-coordenadas.reset_coord(0,0,0);//Entrada de coordenadas para o vetor
+coordenadas.reset_comp(0,0,0);//Entrada de coordenadas para o vetor
+
+std::cout << "Valores das componentes do vetor:" << std::endl;
+std::cout << "Vx="<< coordenadas.comp[0] << std::endl;
+std::cout << "Vy="<< coordenadas.comp[1] << std::endl;
+std::cout << "Vz="<< coordenadas.comp[2] << std::endl;
 
 
 	return 0;
