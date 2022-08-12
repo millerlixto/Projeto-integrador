@@ -1,5 +1,5 @@
 /******************************************************************************
- classe_vetor3D.h
+ classe_vetor3D.cpp
 
  Linguagem c++
 
@@ -12,7 +12,9 @@ Ultima modificacao: 03/01/2022
 Status:FUNCIONANDO
 * *******************************************************************************/
 
+
 #include <iostream>
+
 
 
 //Classe que recebe as coordenadas do vetor S
@@ -52,20 +54,24 @@ return result;
 //método que calcula o produto escalar entre dois vetores:
 float scalar_product(vetor3d v){
 float result = 0.0;
-for(int i=0;i<2;i++)result=+ v.comp[i]*this->comp[i];
+for(int i=0;i<=2;i++)result+= v.comp[i]*this->comp[i];
 
 return result;
 }
 
 //esta função deve fazer a transformação de coordenadas esféricas (r, theta, phi) para cartesianas
 //observe que os ângulos devem estar em radianos
-	void transf_coord_from_spher_to_cart(float r, float theta_rad, float phi_rad){
+	/*void transf_coord_from_spher_to_cart(float r, float theta_rad, float phi_rad){
 		
-		//as linhas abaixo foram comentadas só para poder compilar
-		/*this->comp[0] =0.0;
-		this->comp[1] =0.0 ;
-		this->comp[2] = 0.0;*/
-	}
+		this->comp[0] =
+		this->comp[1] =
+		this->comp[2] = 
+	}*/
 
 };
+
+
+	
+	
+
 
