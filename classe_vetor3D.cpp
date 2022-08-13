@@ -11,8 +11,7 @@ Data de criação: 24/07/2022
 Ultima modificacao: 03/01/2022
 Status:FUNCIONANDO
 * *******************************************************************************/
-
-
+#include <cmath>
 #include <iostream>
 
 
@@ -61,12 +60,14 @@ return result;
 
 //esta função deve fazer a transformação de coordenadas esféricas (r, theta, phi) para cartesianas
 //observe que os ângulos devem estar em radianos
-	/*void transf_coord_from_spher_to_cart(float r, float theta_rad, float phi_rad){
-		
-		this->comp[0] =
-		this->comp[1] =
-		this->comp[2] = 
-	}*/
+//r = raio, theta_rad = âgulo zenital,Phi_rad = âgulo azimutal
+	void transf_coord_from_spher_to_cart(float r, float theta_rad, float phi_rad){
+	    
+	float beta_rad = 90-(theta_rad);
+	this->comp[0] =r*(std::cos(beta_rad)*cos(phi_rad));
+	this->comp[1] =r*(std::cos(beta_rad)*sin(phi_rad));
+	this->comp[2] =r*(std::sin(beta_rad));
+	}
 
 };
 
