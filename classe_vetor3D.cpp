@@ -69,6 +69,17 @@ return result;
 	this->comp[2] =r*(std::sin(beta_rad));
 	}
 
+//esta função deve fazer a transformação de coordenadas equatoriais(delta) para hotizontais
+//delta = declinação, H = ângulo horario, h = ângulo altura, theta = ângulo zenital
+//observe que os ângulos devem estar em radianos
+	float transf_coord_from_equat_to_horizon_theta(float Delta_rad, float h_rad,float H_rad){
+	float theta,result ;
+	
+	theta = std::sin(h_rad)*sin(Delta_rad)+cos(h_rad)*cos(H_rad)*cos(Delta_rad);
+	result = theta;
+	
+	return result;
+	}
 };
 
 
