@@ -70,15 +70,37 @@ return result;
 	}
 
 	
-//esta função deve fazer a transformação de coordenada equatorial(delta) para hotizontai(altura)
+//esta função deve fazer a transformação de coordenada,
+//equatorial(delta) para horizontal(altura)
 //observe que os ângulos devem estar em radianos
-//formula cos(cos Delta * sin H/sin phi) = theta 
-//delta_rad = declinação, H = ângulo hrario, h = ângulo altura, theta = ângulo zenital,phi = Angulo azimutal
-	float transf_coord_from_equat_to_horizon_theta(float Delta_rad, float phi_rad,float H_rad){
-	float theta,result= 0.0;
+//formula cos Delta * sin HA/sin phi = theta 
+//delta_rad = declinação, hA_rad = ângulo hrario, h_rad = ângulo altura, 
+//theta_rad = ângulo zenital,phi_rad = Angulo azimutal
+    float transf_coord_from_equat_to_horizon_theta(float delta_rad, float phi_rad,float hA_rad){
+	float theta,theta_rad,convert_theta,result;
+
 	theta = 90;
-	theta -= std::cos(cos(Delta_rad)*sin(H_rad)/sin(phi_rad));
-	
+	//conversão para radianos do angulo theta
+	convert_theta = (theta*3.141592653589793238462643383279502884197169399375105820974944)/180;
+	theta_rad = convert_theta;
+	theta_rad -= std::cos(delta_rad)*sin(hA_rad)/sin(phi_rad);
+	result = theta;
+	return result;
+	}	
+
+
+
+//esta função deve fazer a transformação de coordenada,
+//equatorial(phi) para horizontal(Azimutal)
+//observe que os ângulos devem estar em radianos
+//formula = cos angulo Azimutal = - cos latitude* sin declinação + sin latitude * cos declinação * cos angulo horário/cos altura 
+//delta_rad = declinação, hA_rad = ângulo hrario,
+//h_rad = altura,phi_rad = Angulo azimutal, beta_rad = latitude
+	float transf_coord_from_equat_to_horizon_theta(float delta_rad, float beta_rad,float hA_rad,float h_rad){
+	float phi_rad,result;
+
+    phi_rad = - std::cos(beta_rad)*sin(delta_rad)+sin(beta_rad)*cos(delta_rad)*cos(hA_rad)/cos(h_rad);
+	result = phi_rad;
 	return result;
 	}
 };
