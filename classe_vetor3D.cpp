@@ -69,24 +69,57 @@ return result;
 	this->comp[2] =r*(std::sin(beta_rad));
 	}
 
-	
+};
+
+//Essas funções abaixo não devem ficar dentro da classe vetor3D
+
+//Use nomes auto_explicativos para as variáveis. Menos comentários no código. Apague todos esses meus comentários depois que os entender tbm.
 //esta função deve fazer a transformação de coordenada,
 //equatorial(delta) para horizontal(altura)
 //observe que os ângulos devem estar em radianos
 //formula cos Delta * sin HA/sin phi = theta 
 //delta_rad = declinação, hA_rad = ângulo hrario, h_rad = ângulo altura, 
 //theta_rad = ângulo zenital,phi_rad = Angulo azimutal
-    float transf_coord_from_equat_to_horizon_theta(float delta_rad, float phi_rad,float hA_rad){
-	float theta,theta_rad,convert_theta,result;
+float transf_coord_from_equat_to_horizon_theta(float delta_rad, float phi_rad,float hA_rad){
+	float theta_rad;
 
-	theta = 90;
+	//mexi algumas coisas aqui mas a conta ainda nao está correta pq vc está dizendo que o resultado dessa conta é um valor de ângulo quando na verdade é o valor de uma função trigonométrica do ângulo. Foque no ângulo altura: mais fácil.
+	//evite que seu código faça operações de memória desnecessárias
+
 	//conversão para radianos do angulo theta
-	convert_theta = (theta*3.141592653589793238462643383279502884197169399375105820974944)/180;
-	theta_rad = convert_theta;
-	theta_rad -= std::cos(delta_rad)*sin(hA_rad)/sin(phi_rad);
-	result = theta;
-	return result;
-	}	
+	theta_rad = (90*M_PI )/180;
+
+	theta_rad -= cos(delta_rad)*sin(hA_rad)/sin(phi_rad);
+
+	return theta_rad;
+}	
+
+//**********
+//**********
+//Miller, vou colar aqui a função que construí pra vc ver se ajuda e o que pode aproveitar.
+//Algumas coisas pra vc notar:
+//Foque nos ângulos Altura (ao invés do zenital) e Azimutal.
+//Veja que a conta não vai até o valor do angulo em si, mas sim do seno do angulo
+//Sugiro também que vc procure construir suas funções sempre de modo a calcular uma coisa de cada vez.
+//Usar sempre funções pequenas a partir de outras funções pequenas. Esse é o estilo "código limpo". Importante pra tudo nao ficar uma bagunçã quando o código fica grande.
+//Outra coisa é o nome das variáveis. Procure usar nomes auto-explicativos para as variáveis.
+//Veja que os comentários que fiz nessa minha função são redundantes pelos nomes das funções e das variáveis usadas
+//Pegue o que quiser daqui, construa sua função e depois apague todos esses comentários e a minha função, por favor.
+//
+float sin_Alt_calculation(int NDA, float lat, float local_time){
+
+	float hor_rad = ang_hor_rad(local_time); //função que construí que transforma a hora em ângulo horário
+
+	float lat_rad = deg_to_rad(lat);//função que construí que transf graus para radianos
+
+	float decl_rad = decl_calculation(NDA); //função que construí que calcula a declinação a partir do numero do dia do ano (NDA)
+
+	float sin_Alt = sin(lat_rad)*sin(decl_rad) + cos(lat_rad)*cos(decl_rad)*cos(hor_rad); //THIS GUY
+
+	return sin_Alt; //retorna o seno do ângulo altura
+}
+//**********
+//**********
 
 
 
@@ -103,10 +136,31 @@ return result;
 	result = phi_rad;
 	return result;
 	}
-};
 
 
-	
-	
+//**********
+//**********
+//Outra função segundo minha construção:
+//Veja se entende as construções, pegue o que quiser e depois apague do código, please.
+//
+float sin_Azim_calculation(int NDA, float lat, float local_time){
 
+	float hor_rad = ang_hor_rad(local_time);
 
+	float lat_rad = deg_to_rad(lat);
+
+	float decl_rad = decl_calculation(NDA);
+
+	float sin_Alt = sin(lat_rad)*sin(decl_rad) + cos(lat_rad)*cos(decl_rad)*cos(hor_rad); //THIS GUY
+	float cos_Alt = sqrt(1 - pow(sin_Alt,2));
+
+	//ângulo/distância zenital é o complementar da altura Alt
+	/* float zen = acos(sin_Alt); */
+
+	float sin_Azim = cos(decl_rad)*sin(hor_rad)/cos_Alt;  //AND THIS GUY
+	/* float cos_Azim = sqrt(1 - pow(sin_Azim,2)); */
+
+	return sin_Azim;// retorna o seno do ângulo azimutal
+}
+
+//**********
