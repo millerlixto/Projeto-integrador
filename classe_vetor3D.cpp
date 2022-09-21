@@ -1,8 +1,9 @@
-#include "classe_function.cpp"
+//------------------------------------------------------------------------------------------------------------------------------------
+#include "various_fuctions.h"
 #include <iostream>
 #include <cmath>
 
-
+	
 //Classe que recebe as coordenadas do vetor S
 class vetor3d{
  
@@ -50,11 +51,16 @@ return result;
 //r = raio, theta_rad = âgulo zenital,Phi_rad = âgulo azimutal
 	void transf_coord_from_spher_to_cart(float r, float theta_rad, float phi_rad){
 	    
-	float beta_rad = 90-(theta_rad); // mexer aqui para transformar para radiano !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	float beta_rad = 90-(theta_rad);
 	this->comp[0] =r*std::cos(beta_rad)*cos(phi_rad);
 	this->comp[1] =r*std::cos(beta_rad)*sin(phi_rad);
 	this->comp[2] =r*std::sin(beta_rad);
 	}
-
+	
 };
+
+
+ 
+
+
 
