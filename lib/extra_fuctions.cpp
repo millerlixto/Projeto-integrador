@@ -29,7 +29,9 @@
     //observe que os ângulos devem estar em radianos
     inline float transf_coord_from_equat_declination_to_horizon_altura(float nda, float azim_rad,float local_time){
         
-	float altura_rad = 90; altura_rad = transformation_deg_to_rad(altura_rad);//conversão para radianos, do angulo altura
+	float altura_rad = 90; 
+
+	altura_rad = transformation_deg_to_rad(altura_rad);//conversão para radianos, do angulo altura
 	
 	float decl_rad =  declination_calculation(nda); //calculo da declinação a partir do numero do dia do ano
 	
